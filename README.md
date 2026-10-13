@@ -13,7 +13,7 @@ This project models the core business logic of a university enrollment system. I
 
 The application runs as a command-line demonstration backed by in-memory repositories.
 
-My task: Build a University Enrollment System from scratch, applying **Domain-Driven Design (DDD)** principles, **TypeScript Branded Types**, and the **Observer Pattern**.
+Developed as an educational project for EPITA's Advanced JavaScript module. My task: Build a University Enrollment System from scratch, applying **Domain-Driven Design (DDD)** principles, **TypeScript Branded Types**, and the **Observer Pattern**.
 
 ---
 
@@ -65,11 +65,11 @@ The CLI demonstrates student and course registration, enrollment attempts, inval
 
 ## Design Principles
 
-Domain-driven design: Organizes the application around the business domain.
-Type safety: Uses TypeScript to distinguish domain concepts and constrain valid operations.
-Encapsulation: Keeps business rules close to the entities and services responsible for enforcing them.
-Separation of concerns: Separates application workflows, storage, and event handling.
-Observer pattern: Supports reactions to events without coupling every observer directly to the business workflow.
+- Domain-driven design: Organizes the application around the business domain.
+- Type safety: Uses TypeScript to distinguish domain concepts and constrain valid operations.
+- Encapsulation: Keeps business rules close to the entities and services responsible for enforcing them.
+- Separation of concerns: Separates application workflows, storage, and event handling.
+- Observer pattern: Supports reactions to events without coupling every observer directly to the business workflow.
 
 ## Limitations
 
@@ -77,9 +77,9 @@ This is a learning project focused on domain modeling and application logic. It 
 
 ## Future Improvements
 
-Automated unit and integration tests
-Stronger type-checking and validation coverage
-Persistent storage
-An HTTP API for enrollment operations
-Continuous integration to run checks automatically
+- Persistent storage instead of in-memory repositories
+- An HTTP API for enrollment operations
+- Continuous integration to run tests automatically
+- Additional edge-case and integration tests
+- Improved logging and error reporting
 
