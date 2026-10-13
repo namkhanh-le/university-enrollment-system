@@ -66,7 +66,7 @@ export class Enrollment {
 
   complete(grade: number): Result<void> {
     if (this._status !== "active") return Err(`Cannot complete: enrollment is already "${this._status}"`)
-    if (grade < 0 || grade > 20)  return Err(`Grade must be 0-20, got ${grade}`)
+    if (!Number.isFinite(grade) || grade < 0 || grade > 20)  return Err(`Grade must be 0-20, got ${grade}`)
     this._status = "completed"
     this._grade  = grade
     const event: EnrollmentCompletedEvent = {
