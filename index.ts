@@ -33,25 +33,36 @@ const bob   = bobR.value;   studentRepo.save(bob)
 const ts    = tsR.value;    courseRepo.save(ts)
 const ddd   = dddR.value;   courseRepo.save(ddd)
 
-// --- Scenario 2: Successful enrollments ---
-console.log("\n=== Enroll Students ===")
+/// --- Scenario 2: Successful enrollments ---
+console.log("\n=== Enrollments & Duplicate Check ===")
+
 const e1 = service.enrollStudent(alice.id, ts.id)
-const e2 = service.enrollStudent(bob.id,   ts.id)
-const e3 = service.enrollStudent(alice.id, ddd.id)
 console.log("Alice → TS:", e1.ok ? "OK" : e1.error)
-console.log("Bob   → TS:", e2.ok ? "OK" : e2.error)
+
+// Try Alice again while the course still has an available seat.
+const dup = service.enrollStudent(alice.id, ts.id)
+console.log("Alice duplicate:", dup.ok ? "UNEXPECTED SUCCESS" : dup.error)
+
+const e2 = service.enrollStudent(bob.id, ts.id)
+console.log("Bob → TS:", e2.ok ? "OK" : e2.error)
+
+const e3 = service.enrollStudent(alice.id, ddd.id)
 console.log("Alice → DDD:", e3.ok ? "OK" : e3.error)
 
 // --- Scenario 3: Invariant violations ---
 console.log("\n=== Violations ===")
-const dup  = service.enrollStudent(alice.id, ts.id)  // duplicate
-const full = service.enrollStudent(bob.id, ddd.id)   // course full
-console.log("Duplicate enrollment:", dup.ok  ? "SHOULD HAVE FAILED" : dup.error)
-console.log("Full course:",          full.ok ? "SHOULD HAVE FAILED" : full.error)
 
+// TS should now be full: Alice and Bob occupy its two seats.
+const full = service.enrollStudent(bob.id, ddd.id)
+console.log("Full course:", full.ok ? "UNEXPECTED SUCCESS" : full.error)
+
+// Deactivate Alice, then attempt another enrollment.
 alice.deactivate("Left university")
 const inactive = service.enrollStudent(alice.id, ddd.id)
-console.log("Inactive student:", inactive.ok ? "SHOULD HAVE FAILED" : inactive.error)
+console.log(
+  "Inactive student:",
+  inactive.ok ? "UNEXPECTED SUCCESS" : inactive.error
+)
 
 // --- Scenario 4: Withdrawal ---
 console.log("\n=== Withdrawal ===")
