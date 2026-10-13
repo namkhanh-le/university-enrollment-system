@@ -1,5 +1,5 @@
 {
-	"name": "advanced-js-sass-ddd",
+	"name": "university-enrollment-system",
 	"version": "1.0.0",
 	"description": "University Enrollment Systme",
 	"main": "index.js",
@@ -7,7 +7,7 @@
 		"doc": "docs"
 	},
 	"scripts": {
-		"dev": "npx ts-node index.ts"
+		"dev": "tsx index.ts"
 	},
 	"repository": {
 		"type": "git",
