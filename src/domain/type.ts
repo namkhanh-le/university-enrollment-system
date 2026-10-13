@@ -74,6 +74,7 @@ export function makeCapacity(n: number): Result<Capacity> {
 }
 
 export function makeGPA(n: number): Result<GPA> {
-  if (n < 0 || n > 4.0) return Err(`GPA must be 0.0-4.0, got ${n}`);
+  if (!Number.isFinite(n) || n < 0 || n > 4.0) 
+    return Err(`GPA must be 0.0-4.0, got ${n}`);
   return Ok(n as GPA);
 }
